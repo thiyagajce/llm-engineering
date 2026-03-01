@@ -16,6 +16,9 @@ def chatbot_client():
     old_cwd = os.getcwd()
     try:
         os.chdir(str(chatbot_dir))
+        import sys
+        if 'app' in sys.modules:
+            del sys.modules['app']
         from app import app
         app.config['TESTING'] = True
         with app.test_client() as client:
@@ -94,6 +97,9 @@ def rag_client():
     old_cwd = os.getcwd()
     try:
         os.chdir(str(rag_dir))
+        import sys
+        if 'app' in sys.modules:
+            del sys.modules['app']
         from app import app
         app.config['TESTING'] = True
         with app.test_client() as client:
